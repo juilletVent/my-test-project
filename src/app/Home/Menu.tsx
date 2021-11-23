@@ -1,18 +1,10 @@
 import { Menu } from "antd";
 import { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
 import { SortAscendingOutlined, StarOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LeftMenu } from "../../components/style/common";
 
 const { SubMenu } = Menu;
-
-const LeftMenu = styled.div`
-  width: 300px;
-  height: 100%;
-  ul {
-    height: 100%;
-  }
-`;
 
 export const menuPath = {
   PATH_SORT_BASIC: "sort-basic",
