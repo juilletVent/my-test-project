@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 const menuWidth = 300;
 
@@ -13,6 +14,10 @@ export const ContentContainer = styled.div`
   width: calc(100vw - ${menuWidth}px);
   height: 100vh;
   padding: 15px;
+  .ant-list-items {
+    position: relative;
+    height: 280px;
+  }
   .ant-list-item {
     display: flex;
     justify-content: space-between;
@@ -25,4 +30,10 @@ export const DragBtn = styled.div`
   padding: 5px;
   margin-left: 20px;
   cursor: move;
+`;
+
+export const ItemLayout = styled(animated.div)`
+  position: absolute;
+  width: 100%;
+  background-color: white;
 `;
