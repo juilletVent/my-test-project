@@ -32,8 +32,12 @@ export const DragBtn = styled.div`
   cursor: move;
 `;
 
-export const ItemLayout = styled(animated.div)`
+export const AbsoluteItemLayout = styled(animated.div)`
   position: absolute;
   width: 100%;
+  background-color: white;
+`;
+export const RelativeItemLayout = styled(animated.div)`
+  position: relative;
   background-color: white;
 `;

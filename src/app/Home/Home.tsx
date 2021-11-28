@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ScrollHorizontal from "../ScrollHorizontal/ScrollHorizontal";
 import ScrollOffset from "../ScrollOffset/ScrollOffset";
 import SortBasic from "../SortBasic/SortBasic";
+import SortPosition from "../SortPosition/SortPosition";
 import SortTree from "../SortTree/SortTree";
 import SortTwoDimension from "../SortTwoDimension/SortTwoDimension";
 import LocalMenu, { menuPath } from "./Menu";
@@ -21,6 +22,7 @@ function Home() {
       <LocalMenu />
       <Routes>
         <Route path={menuPath.PATH_SORT_BASIC} element={<SortBasic />} />
+        <Route path={menuPath.PATH_SORT_POSITION} element={<SortPosition />} />
         <Route
           path={menuPath.PATH_SORT_TWO_DIMENSION}
           element={<SortTwoDimension />}

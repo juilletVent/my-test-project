@@ -8,6 +8,7 @@ const { SubMenu } = Menu;
 
 export const menuPath = {
   PATH_SORT_BASIC: "sort-basic",
+  PATH_SORT_POSITION: "sort-position",
   PATH_SORT_TWO_DIMENSION: "sort-two-dimension",
   PATH_SORT_TREE: "sort-tree",
   PATH_SCROLL_OFFSET: "scroll-offset",
@@ -38,7 +39,12 @@ function LocalMenu() {
         mode="inline"
       >
         <SubMenu key="sort" icon={<SortAscendingOutlined />} title="拖曳排序">
-          <Menu.Item key={menuPath.PATH_SORT_BASIC}>拖曳排序列表</Menu.Item>
+          <Menu.Item key={menuPath.PATH_SORT_BASIC}>
+            拖曳排序列表（elementFromPoint）
+          </Menu.Item>
+          <Menu.Item key={menuPath.PATH_SORT_POSITION}>
+            拖曳排序列表（基于位置）
+          </Menu.Item>
           <Menu.Item key={menuPath.PATH_SORT_TWO_DIMENSION}>
             拖曳排序二维表（TODO）
           </Menu.Item>

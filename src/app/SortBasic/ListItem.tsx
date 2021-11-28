@@ -1,22 +1,25 @@
 import { List } from "antd";
 import { clamp } from "lodash";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import UnorderedListOutlined from "@ant-design/icons/lib/icons/UnorderedListOutlined";
 import { useSpring } from "@react-spring/core";
-import { DragBtn, ItemLayout } from "../../components/style/common";
+import { DragBtn, AbsoluteItemLayout } from "../../components/style/common";
 import { useToggle } from "ahooks";
 
 interface Props {
-  actived: boolean;
   content: string;
+  modifyIndex: number;
+  activeIndex: number;
   setActiveKey: (key?: string) => void;
-  setMoveCurrentIndex: (key?: number) => void;
+  setModifyKey: (key?: string | number) => void;
+  modifyKey?: string;
   index: number;
-  moveCurrentIndex?: number;
+  onDragEnd: () => void;
 }
 
 function ListItem(props: Props) {
-  const { actived, content, setActiveKey, index } = props;
+  const { modifyIndex, activeIndex, modifyKey } = props;
+  const { content, setActiveKey, setModifyKey, index, onDragEnd } = props;
   const [dragIng, { toggle: switchDraging }] = useToggle();
   const [startPoitionState, setStartPoitionState] = useState({
     startX: 0,
@@ -26,6 +29,25 @@ function ListItem(props: Props) {
     startX: 0,
     startY: 0,
   });
+  const actived = useMemo(() => activeIndex === index, [activeIndex, index]);
+  const yOffset = useMemo(() => {
+    if (modifyIndex === -1 || activeIndex === -1) {
+      return 0;
+    }
+    if (activeIndex < index && modifyIndex >= index) {
+      return -56;
+    }
+    if (activeIndex > index && modifyIndex <= index) {
+      return 56;
+    }
+    return 0;
+  }, [activeIndex, index, modifyIndex]);
+  const yActiveOffset = useMemo(() => {
+    if (modifyIndex === -1) {
+      return 0;
+    }
+    return 56 * (modifyIndex - activeIndex);
+  }, [activeIndex, modifyIndex]);
   const itemRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLDivElement>(null);
   const updateZIndex = useCallback(() => {
@@ -34,17 +56,27 @@ function ListItem(props: Props) {
     }
   }, [actived]);
 
+  const onDrageAnimStart = useCallback(() => {
+    updateZIndex();
+    if (itemRef.current) {
+      itemRef.current.dataset.animing = "true";
+    }
+  }, [updateZIndex]);
   const onDrageAnimEnd = useCallback(() => {
     updateZIndex();
-    if (!dragIng) {
-      // TODO 通知上层，动画结束，同步数据
+    if (itemRef.current) {
+      itemRef.current.dataset.animing = "false";
     }
-  }, [dragIng, updateZIndex]);
+    if (!dragIng && actived) {
+      // 通知上层，动画结束，同步数据
+      onDragEnd();
+    }
+  }, [actived, dragIng, onDragEnd, updateZIndex]);
 
   const activeAnimProps = useSpring({
-    config: { tension: 250 },
+    config: { tension: 400 },
     to: {
-      transform: `translate3d(0px, ${index * 56}px, 0px) scale(1)`,
+      transform: `translate3d(0px, ${index * 56 + yOffset}px, 0px) scale(1)`,
       boxShadow: "0 0 5px rgba(0,0,0,0)",
     },
     from: {
@@ -55,7 +87,7 @@ function ListItem(props: Props) {
       )}px, 0px) scale(1.01)`,
       boxShadow: "0 0 5px rgba(0,0,0,0.25)",
     },
-    onStart: updateZIndex,
+    onStart: onDrageAnimStart,
     onRest: onDrageAnimEnd,
     reverse: actived,
   });
@@ -65,6 +97,7 @@ function ListItem(props: Props) {
       if (btnRef.current) {
         btnRef.current.setPointerCapture(e.pointerId);
         setActiveKey(activeKey);
+        setModifyKey(activeKey);
       }
       switchDraging(true);
       // 记录点击的页面位置
@@ -77,39 +110,86 @@ function ListItem(props: Props) {
         startY: e.pageY,
       });
     },
-    [setActiveKey, switchDraging]
+    [setActiveKey, setModifyKey, switchDraging]
   );
   const onDrageEnd = useCallback(
     (e: any) => {
       if (btnRef.current) {
         btnRef.current.releasePointerCapture(e.pointerId);
-        setActiveKey();
       }
       switchDraging(false);
       setStartPoitionState({
-        startX: e.pageX,
-        startY: e.pageY,
+        startX: 0,
+        startY: 0,
+      });
+      setEndPositionState({
+        startX: 0,
+        startY: yActiveOffset,
       });
     },
-    [setActiveKey, switchDraging]
+    [switchDraging, yActiveOffset]
   );
   const onDrageMove = useCallback(
     (e: any) => {
       if (!dragIng) {
         return;
       }
-      // TODO 通知被压住的项目进行位置变换
+      // 隐藏当前元素
+      const itemNode = e.target.closest(".list-item-tag");
+      itemNode.style.pointerEvents = "none";
+      // 尝试获取被压住的下层元素
+      const targetNode = document.elementFromPoint(e.pageX, e.pageY);
+      if (targetNode) {
+        const targetItem = targetNode.closest(".list-item-tag") as HTMLElement;
+        // 取得目标key,反馈给父级元素
+        if (targetItem && targetItem.dataset.animing !== "true") {
+          if (modifyKey === targetItem.dataset.key) {
+            if (modifyIndex > activeIndex && modifyIndex - activeIndex >= 2) {
+              // 应设置modifyKey为[modifyIndex-1]的值
+              setModifyKey(modifyIndex - 1);
+              // 恢复显示
+              itemNode.style.pointerEvents = "auto";
+              setEndPositionState({
+                startX: e.pageX,
+                startY: e.pageY,
+              });
+              return;
+            }
+            if (modifyIndex < activeIndex && activeIndex - modifyIndex >= 2) {
+              // 应设置modifyKey为[modifyIndex+1]的值
+              setModifyKey(modifyIndex + 1);
+              // 恢复显示
+              itemNode.style.pointerEvents = "auto";
+              setEndPositionState({
+                startX: e.pageX,
+                startY: e.pageY,
+              });
+              return;
+            }
+            setModifyKey();
+          } else {
+            setModifyKey(targetItem.dataset.key);
+          }
+        }
+      }
+      // 恢复显示
+      itemNode.style.pointerEvents = "auto";
       setEndPositionState({
         startX: e.pageX,
         startY: e.pageY,
       });
     },
-    [dragIng]
+    [activeIndex, dragIng, modifyIndex, modifyKey, setModifyKey]
   );
 
   return (
-    <ItemLayout ref={itemRef} style={activeAnimProps}>
-      <List.Item data-index={content}>
+    <AbsoluteItemLayout
+      ref={itemRef}
+      style={activeAnimProps}
+      className="list-item-tag"
+      data-key={content}
+    >
+      <List.Item>
         {content}
         <DragBtn
           ref={btnRef}
@@ -120,7 +200,7 @@ function ListItem(props: Props) {
           <UnorderedListOutlined />
         </DragBtn>
       </List.Item>
-    </ItemLayout>
+    </AbsoluteItemLayout>
   );
 }
 
