@@ -67,6 +67,7 @@ function ListItem(props: Props) {
     if (itemRef.current) {
       itemRef.current.dataset.animing = "false";
     }
+
     if (!dragIng && actived) {
       // 通知上层，动画结束，同步数据
       onDragEnd();
@@ -74,7 +75,7 @@ function ListItem(props: Props) {
   }, [actived, dragIng, onDragEnd, updateZIndex]);
 
   const activeAnimProps = useSpring({
-    config: { tension: 400 },
+    config: { tension: actived ? 400 : 250 },
     to: {
       transform: `translate3d(0px, ${index * 56 + yOffset}px, 0px) scale(1)`,
       boxShadow: "0 0 5px rgba(0,0,0,0)",
@@ -126,9 +127,13 @@ function ListItem(props: Props) {
         startX: 0,
         startY: yActiveOffset,
       });
+      if (itemRef.current && itemRef.current.dataset.animing !== "true") {
+        onDragEnd();
+      }
     },
-    [switchDraging, yActiveOffset]
+    [onDragEnd, switchDraging, yActiveOffset]
   );
+
   const onDrageMove = useCallback(
     (e: any) => {
       if (!dragIng) {
