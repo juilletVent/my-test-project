@@ -1,5 +1,5 @@
 import { List } from "antd";
-import { clamp, isNil } from "lodash";
+import { clamp } from "lodash";
 import { useCallback, useMemo, useRef, useState } from "react";
 import UnorderedListOutlined from "@ant-design/icons/lib/icons/UnorderedListOutlined";
 import { useSpring } from "@react-spring/core";

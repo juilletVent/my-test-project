@@ -9,10 +9,12 @@ const { SubMenu } = Menu;
 export const menuPath = {
   PATH_SORT_BASIC: "sort-basic",
   PATH_SORT_POSITION: "sort-position",
+  PATH_SORT_REACT_USE_GESTURE: "react-use-gesture",
   PATH_SORT_TWO_DIMENSION: "sort-two-dimension",
   PATH_SORT_TREE: "sort-tree",
-  PATH_SCROLL_OFFSET: "scroll-offset",
-  PATH_SCROLL_HORIZONTAL: "scroll-horizontal",
+  PATH_EFFECT_DEMO: "effect-demo",
+  PATH_EFFECT_SCROLL_OFFSET: "scroll-offset",
+  PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
 };
 
 function LocalMenu() {
@@ -45,6 +47,9 @@ function LocalMenu() {
           <Menu.Item key={menuPath.PATH_SORT_POSITION}>
             拖曳排序列表（基于位置）
           </Menu.Item>
+          <Menu.Item key={menuPath.PATH_SORT_REACT_USE_GESTURE}>
+            拖曳排序列表（react-use-gesture）
+          </Menu.Item>
           <Menu.Item key={menuPath.PATH_SORT_TWO_DIMENSION}>
             拖曳排序二维表（TODO）
           </Menu.Item>
@@ -53,10 +58,11 @@ function LocalMenu() {
           </Menu.Item>
         </SubMenu>
         <SubMenu key="effects" icon={<StarOutlined />} title="特效实现">
-          <Menu.Item key={menuPath.PATH_SCROLL_OFFSET}>
+          <Menu.Item key={menuPath.PATH_EFFECT_DEMO}>CSS样式测试页</Menu.Item>
+          <Menu.Item key={menuPath.PATH_EFFECT_SCROLL_OFFSET}>
             贴合滚动-基础（TODO）
           </Menu.Item>
-          <Menu.Item key={menuPath.PATH_SCROLL_HORIZONTAL}>
+          <Menu.Item key={menuPath.PATH_EFFECT_SCROLL_HORIZONTAL}>
             贴合滚动-横向（TODO）
           </Menu.Item>
         </SubMenu>
