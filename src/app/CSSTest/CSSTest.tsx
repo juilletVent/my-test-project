@@ -1,5 +1,6 @@
-import React from "react";
 import styled from "styled-components";
+import { Input, List } from "antd";
+import { ChangeEvent, useCallback, useEffect, useRef } from "react";
 
 const Layout = styled.div`
   padding: 10px;
@@ -18,9 +19,113 @@ const Layout = styled.div`
       font-size: 1.5em;
     }
   }
+  .input-fill-x,
+  .input-outline-x,
+  .textarea-outline-x {
+    width: fit-content;
+    position: relative;
+  }
+  .input-fill-x {
+    border-bottom: 1px solid #d0d0d5;
+  }
+  .input-fill-x::after {
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid #2486ff;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+  .input-fill-x:focus-within::after {
+    transform: scaleX(1);
+  }
+  .input-control {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    outline: none;
+  }
+  .input-fill {
+    padding: 20px 16px 6px;
+    border: 1px solid transparent;
+    background: #f5f5f5;
+  }
+  .input-outline,
+  .textarea-outline {
+    padding: 13px 16px 13px;
+    border: 1px solid #d0d0d5;
+    border-radius: 4px;
+    transition: border-color 0.25s;
+  }
+  .input-outline:focus,
+  .textarea-outline:focus {
+    border-color: #2486ff;
+  }
+  /* 默认placeholder颜色透明不可见 */
+  .input-control:placeholder-shown::placeholder {
+    color: transparent;
+  }
+  .input-label {
+    position: absolute;
+    font-size: 16px;
+    line-height: 1.5;
+    left: 16px;
+    top: 14px;
+    color: #a2a9b6;
+    padding: 0 2px;
+    transform-origin: 0 0;
+    pointer-events: none;
+    transition: all 0.25s;
+  }
+  /* 线框样式label定位 */
+  .input-control:not(:placeholder-shown) ~ .input-label,
+  .input-control:focus ~ .input-label {
+    color: #2486ff;
+    transform: scale(0.75) translate(-2px, -32px);
+  }
+  /* 填充样式下label定位 */
+  .input-fill:not(:placeholder-shown) ~ .input-label,
+  .input-fill:focus ~ .input-label {
+    transform: scale(0.75) translateY(-14px);
+  }
+  /* 线框交互下有个白色背景 */
+  .input-outline ~ .input-label,
+  .textarea-outline ~ .input-label {
+    background-color: #fff;
+  }
 `;
 
+const data = [
+  { key: "重庆 cq chongqing", title: "重庆" },
+  { key: "北京 bj beijing", title: "北京" },
+  { key: "莫斯科 msk mosike", title: "莫斯科" },
+  { key: "伦敦 ld lundun", title: "伦敦" },
+  { key: "华盛顿 hsd huashengdun", title: "华盛顿" },
+];
+
 function CSSTest() {
+  const styleRef = useRef<HTMLStyleElement>();
+
+  useEffect(() => {
+    const styleNode = document.createElement("style");
+    document.head.appendChild(styleNode);
+    styleRef.current = styleNode;
+  }, []);
+
+  // 借助CSS选择器完成搜索：先匹配所有被选元素，然后则范围内反向选择搜索命中的元素，讲这些元素隐藏即可，关键在于:not的运用
+  const onSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (styleRef.current) {
+      const val = e.target.value.trim();
+      styleRef.current.innerHTML = !!val
+        ? `[data-search]:not([data-search*="${e.target.value}"]){
+        display:none;
+      }`
+        : "";
+    }
+  }, []);
+
   return (
     <Layout>
       <h3 className="firstLetter">First-letter 演示选取第一个字符</h3>
@@ -29,6 +134,36 @@ function CSSTest() {
         First-line
         演示选取第一行;撑着油纸伞，独自彷徨在悠长，悠长又寂寥的雨巷，我希望逢着一个丁香一样地结着愁怨的姑娘。她是有丁香一样的颜色，丁香一样的芬芳，丁香一样的忧愁，在雨中哀怨，哀怨又彷徨；
       </h3>
+      <div className="search">
+        <Input placeholder="请输入区域名称" onChange={onSearch} />
+        <List
+          bordered
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item data-search={item.key}>{item.title}</List.Item>
+          )}
+        />
+      </div>
+      <h4>填充风格</h4>
+      <div className="input-fill-x">
+        <input className="input-control input-fill" placeholder="邮箱" />
+        <label className="input-label">邮箱</label>
+      </div>
+      <h4>轮廓风格</h4>
+      <div className="input-outline-x">
+        <input className="input-control input-outline" placeholder="邮箱" />
+        <label className="input-label">邮箱</label>
+      </div>
+      <h4>文本域</h4>
+      <div className="textarea-outline-x">
+        <textarea
+          className="input-control textarea-outline"
+          cols={25}
+          rows={3}
+          placeholder="评论"
+        ></textarea>
+        <label className="input-label">评论</label>
+      </div>
     </Layout>
   );
 }
