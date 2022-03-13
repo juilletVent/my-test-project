@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router";
 import styled from "styled-components";
 import CSSTest from "../CSSTest/CSSTest";
+import JSTest from "../JSTest/JSTest";
 import ScrollHorizontal from "../ScrollHorizontal/ScrollHorizontal";
 import ScrollOffset from "../ScrollOffset/ScrollOffset";
 import SortBasic from "../SortBasic/SortBasic";
@@ -30,6 +31,7 @@ function Home() {
         />
         <Route path={menuPath.PATH_SORT_TREE} element={<SortTree />} />
         <Route path={menuPath.PATH_EFFECT_DEMO} element={<CSSTest />} />
+        <Route path={menuPath.PATH_JS_DEMO} element={<JSTest />} />
         <Route
           path={menuPath.PATH_EFFECT_SCROLL_OFFSET}
           element={<ScrollOffset />}

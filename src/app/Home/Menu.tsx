@@ -13,6 +13,7 @@ export const menuPath = {
   PATH_SORT_TWO_DIMENSION: "sort-two-dimension",
   PATH_SORT_TREE: "sort-tree",
   PATH_EFFECT_DEMO: "effect-demo",
+  PATH_JS_DEMO: "js-demo",
   PATH_EFFECT_SCROLL_OFFSET: "scroll-offset",
   PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
 };
@@ -57,8 +58,9 @@ function LocalMenu() {
             拖曳排序树（TODO）
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="effects" icon={<StarOutlined />} title="特效实现">
+        <SubMenu key="effects" icon={<StarOutlined />} title="特效实现/测试页">
           <Menu.Item key={menuPath.PATH_EFFECT_DEMO}>CSS样式测试页</Menu.Item>
+          <Menu.Item key={menuPath.PATH_JS_DEMO}>JS样式测试页</Menu.Item>
           <Menu.Item key={menuPath.PATH_EFFECT_SCROLL_OFFSET}>
             贴合滚动-基础（TODO）
           </Menu.Item>
