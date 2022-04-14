@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Input, List } from "antd";
 import { ChangeEvent, useCallback, useEffect, useRef } from "react";
 
@@ -96,6 +96,39 @@ const Layout = styled.div`
     background-color: #fff;
   }
 `;
+const lineColor = "#666";
+const lineLen = "8px";
+const lineAnim = keyframes`
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: ${lineLen} 0;
+  }
+`;
+const SelectArea = styled.div`
+  width: 500px;
+  height: 100px;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(
+      134deg,
+      ${lineColor} 0%,
+      ${lineColor} 24%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 1) 49%,
+      ${lineColor} 50%,
+      ${lineColor} 74%,
+      rgba(255, 255, 255, 1) 75%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  background-size: 100% 100%, ${lineLen} ${lineLen};
+  animation: ${lineAnim} 0.5s linear infinite;
+`;
 
 const data = [
   { key: "重庆 cq chongqing", title: "重庆" },
@@ -164,6 +197,7 @@ function CSSTest() {
         ></textarea>
         <label className="input-label">评论</label>
       </div>
+      <SelectArea>蚂蚁线</SelectArea>
     </Layout>
   );
 }
