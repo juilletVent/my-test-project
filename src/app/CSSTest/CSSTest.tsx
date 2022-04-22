@@ -96,6 +96,8 @@ const Layout = styled.div`
     background-color: #fff;
   }
 `;
+
+/** 蚂蚁线实现-1 */
 const lineColor = "#666";
 const lineLen = "8px";
 const lineAnim = keyframes`
@@ -129,6 +131,59 @@ const SelectArea = styled.div`
   background-size: 100% 100%, ${lineLen} ${lineLen};
   animation: ${lineAnim} 0.5s linear infinite;
 `;
+
+/** 蚂蚁线实现-2 */
+const corpAntsColor = "#666";
+const antsLen = 4;
+const antdWidth = 1;
+const antsLineAnim = keyframes`
+  0% {
+    background-position: 0 0, 100% 0, 0 100%, 0 0;
+  }
+  100% {
+    background-position: ${antsLen * 2}px 0, 100% ${antsLen * 2}px, ${
+  antsLen * -2
+}px 100%, 0 ${antsLen * -2}px;
+  }
+`;
+const SelectArea2 = styled.div`
+  width: 500px;
+  height: 100px;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin: 10px 0;
+
+  border: none;
+  background: linear-gradient(90deg, ${corpAntsColor} 50%, transparent 0)
+      repeat-x,
+    linear-gradient(180deg, ${corpAntsColor} 50%, transparent 0) repeat-y,
+    linear-gradient(-90deg, ${corpAntsColor} 50%, transparent 0) repeat-x,
+    linear-gradient(0deg, ${corpAntsColor} 50%, transparent 0) repeat-y;
+  background-size: ${antsLen * 2}px ${antdWidth}px,
+    ${antdWidth}px ${antsLen * 2}px, ${antsLen * 2}px ${antdWidth}px,
+    ${antdWidth}px ${antsLen * 2}px;
+  background-position: 0 0, 100% 0, 0 100%, 0 0;
+  animation: ${antsLineAnim} 1s linear infinite;
+`;
+
+// export const AntsLineStyle = createGlobalStyle`
+// .ants-line{
+//   border:none;
+//   background: linear-gradient(90deg, ${corpAntsColor} 50%, transparent 0) repeat-x,
+//     linear-gradient(180deg, ${corpAntsColor} 50%, transparent 0) repeat-y,
+//     linear-gradient(-90deg, ${corpAntsColor} 50%, transparent 0) repeat-x,
+//     linear-gradient(0deg, ${corpAntsColor} 50%, transparent 0) repeat-y;
+//   background-size: ${antsLen * 2}px ${antdWidth}px, ${antdWidth}px ${
+//   antsLen * 2
+// }px,
+//     ${antsLen * 2}px ${antdWidth}px, ${antdWidth}px ${antsLen * 2}px;
+//   background-position: 0 0, 100% 0, 0 100%, 0 0;
+//   animation: ${antsLineAnim} 1s linear infinite;
+// }
+// `;
 
 const data = [
   { key: "重庆 cq chongqing", title: "重庆" },
@@ -198,6 +253,7 @@ function CSSTest() {
         <label className="input-label">评论</label>
       </div>
       <SelectArea>蚂蚁线</SelectArea>
+      <SelectArea2 className="ants-line">蚂蚁线完美实现-可用于遮罩</SelectArea2>
     </Layout>
   );
 }
