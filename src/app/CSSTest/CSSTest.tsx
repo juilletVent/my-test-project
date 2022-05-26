@@ -111,6 +111,9 @@ const Like = styled.div`
   height: 100px;
   background-image: url(${headerBg});
   background-size: 2900%;
+  /* 阶跃函数在当前阶段 [n,n+1) 中取值为 n，应用变换 */
+  /* animation: ${heartAnim} 1s steps(28,start) 1 both paused; */
+  /* 阶跃函数在当前阶段中取值为 [n,n+1) 中取值为 n-a，在下一阶段取值为 a */
   animation: ${heartAnim} 1s steps(28) 1 both paused;
   cursor: pointer;
 `;
