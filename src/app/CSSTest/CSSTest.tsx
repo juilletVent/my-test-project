@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { Input, List } from "antd";
-import { ChangeEvent, useCallback, useEffect, useRef } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, MouseEvent } from "react";
+import headerBg from "@/img/heart-animation.png";
 
 const Layout = styled.div`
   padding: 10px;
@@ -95,6 +96,23 @@ const Layout = styled.div`
   .textarea-outline ~ .input-label {
     background-color: #fff;
   }
+`;
+/** 点赞动画实现 */
+const heartAnim = keyframes`
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 100%;
+  }
+`;
+const Like = styled.div`
+  width: 100px;
+  height: 100px;
+  background-image: url(${headerBg});
+  background-size: 2900%;
+  animation: ${heartAnim} 1s steps(28) 1 both paused;
+  cursor: pointer;
 `;
 
 /** 蚂蚁线实现-1 */
@@ -214,6 +232,11 @@ function CSSTest() {
     }
   }, []);
 
+  const onLick = useCallback((e: MouseEvent) => {
+    // @ts-ignore
+    e.target.style.animationPlayState = "running";
+  }, []);
+
   return (
     <Layout>
       <h3 className="firstLetter">First-letter 演示选取第一个字符</h3>
@@ -254,6 +277,7 @@ function CSSTest() {
       </div>
       <SelectArea>蚂蚁线</SelectArea>
       <SelectArea2 className="ants-line">蚂蚁线完美实现-可用于遮罩</SelectArea2>
+      <Like onClick={onLick} />
     </Layout>
   );
 }
