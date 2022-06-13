@@ -1,7 +1,9 @@
 import styled, { keyframes } from "styled-components";
-import { Input, List } from "antd";
+import { Button, Input, List } from "antd";
 import { ChangeEvent, useCallback, useEffect, useRef, MouseEvent } from "react";
 import headerBg from "@/img/heart-animation.png";
+import { useMyCSSFn } from "./CustomCssFn/useMyCSSFn";
+import { darken, lighten, transparentize } from "./CustomCssFn/utils";
 
 const Layout = styled.div`
   padding: 10px;
@@ -239,9 +241,33 @@ function CSSTest() {
     // @ts-ignore
     e.target.style.animationPlayState = "running";
   }, []);
+  const switchColor = useCallback((e: MouseEvent) => {
+    const currentColor = window
+      .getComputedStyle(document.body)
+      .getPropertyValue("--testColor");
+    if (currentColor === "deepskyblue") {
+      document.body.style.setProperty("--testColor", "deeppink");
+      return;
+    }
+    document.body.style.setProperty("--testColor", "deepskyblue");
+  }, []);
+
+  useEffect(() => {
+    document.body.style.setProperty("--testColor", "deeppink");
+  }, []);
+
+  useMyCSSFn(transparentize);
+  useMyCSSFn(lighten);
+  useMyCSSFn(darken);
 
   return (
     <Layout>
+      <Button onClick={switchColor}>Switch Color</Button>
+      <h3 style={{ color: "var(--transparentizeTestColor)" }}>
+        --transparentizeTestColor
+      </h3>
+      <h3 style={{ color: "var(--lightTestColor)" }}>--lightTestColor</h3>
+      <h3 style={{ color: "var(--darkenTestColor)" }}>--darkenTestColor</h3>
       <h3 className="firstLetter">First-letter 演示选取第一个字符</h3>
       <h3 className="money">$ 89.9</h3>
       <h3 className="firstLine">
