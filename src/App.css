@@ -1,7 +1,6 @@
 .App {
-  /* --lightTestColor: mylight(red, 0.5); */
-  /* --transparentizeTestColor: transparentize(0.8, var(--testColor)); */
-  --transparentizeTestColor: transparentize(0.8, red);
-  --lightTestColor: lighten(0.2, var(--testColor));
-  --darkenTestColor: darken(0.2, var(--testColor));
+  /* --transparentizeTestColor: transparentize(0.8, red); */
+  --transparentizeTestColor: transparentize(0.4, var(--testColor));
+  --lightTestColor: lighten(0.4, var(--testColor));
+  --darkenTestColor: darken(0.1, var(--testColor));
 }
