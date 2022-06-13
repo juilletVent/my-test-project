@@ -37,7 +37,7 @@ function funKeywordColor2Rgba(
         keyColor = objStyle.getPropertyValue(matchs2[1]);
       }
       try {
-        const applyColor = customFn(opacity, keyColor);
+        const applyColor = customFn(opacity, keyColor.trim());
         const oriColor = objStyle.getPropertyValue(`--${cssVarItem[0]}`);
         if (oriColor !== applyColor) {
           node.style.setProperty(`--${cssVarItem[0]}`, applyColor);
@@ -146,11 +146,19 @@ function funAutoInitAndWatching(
         const currentItems =
           document.querySelectorAll<HTMLElement>("[data-cssfn]");
         updateStyle(currentItems, arrCssPropsValueIsKeyword, customFn);
+
+        console.log("debug");
+
+        // 当前元素的更新
+        funKeywordColor2Rgba(
+          mutationsList[0].target as HTMLElement,
+          arrCssPropsValueIsKeyword,
+          customFn
+        );
       });
     });
 
     observerSelect.observe(monitorTarget, {
-      childList: true,
       subtree: true,
       attributes: true,
     });
