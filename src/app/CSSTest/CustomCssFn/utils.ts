@@ -15,3 +15,7 @@ export function lighten(amount: number | string, color: string) {
 export function darken(amount: number | string, color: string) {
   return official_darken(amount, color);
 }
+
+export function mydarken222(amount: number | string, color: string) {
+  return official_darken(amount, color);
+}

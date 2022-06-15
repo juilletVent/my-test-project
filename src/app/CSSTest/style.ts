@@ -2,6 +2,9 @@ import styled, { keyframes } from "styled-components";
 import headerBg from "@/img/heart-animation.png";
 
 export const Layout = styled.div`
+  .lightTestColor {
+    color: var(--lightTestColor);
+  }
   padding: 10px;
   .firstLetter::first-letter {
     color: #1890ff;
@@ -198,5 +201,24 @@ export const TextStrock = styled.div`
     position: absolute;
     -webkit-text-stroke: 0;
     color: deepskyblue;
+  }
+`;
+
+export const TextEmpgasisHeart = styled.span`
+  font-size: 24px;
+  text-emphasis: red "❤";
+  text-emphasis-position: under right;
+`;
+export const TextOrientation = styled.p`
+  font-size: 22px;
+  /* 修改文字方向 */
+  writing-mode: vertical-rl;
+  /* 修改英文字符方向 */
+  /* text-orientation: sideways;
+  text-orientation: mixed;
+  text-orientation: upright; */
+  /* text-combine-upright: digits 4; */
+  span {
+    text-combine-upright: all;
   }
 `;

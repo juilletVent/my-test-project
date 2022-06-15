@@ -147,8 +147,6 @@ function funAutoInitAndWatching(
           document.querySelectorAll<HTMLElement>("[data-cssfn]");
         updateStyle(currentItems, arrCssPropsValueIsKeyword, customFn);
 
-        console.log("debug");
-
         // 当前元素的更新
         funKeywordColor2Rgba(
           mutationsList[0].target as HTMLElement,

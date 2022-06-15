@@ -1,8 +1,22 @@
 import { Button, Input, List } from "antd";
 import { ChangeEvent, useCallback, useEffect, useRef, MouseEvent } from "react";
+import { useMyCSSFn2 } from "./CustomCss/useMyCSSFn";
 import { useMyCSSFn } from "./CustomCssFn/useMyCSSFn";
-import { darken, lighten, transparentize } from "./CustomCssFn/utils";
-import { Layout, Like, SelectArea, SelectArea2, TextStrock } from "./style";
+import {
+  darken,
+  lighten,
+  mydarken222,
+  transparentize,
+} from "./CustomCssFn/utils";
+import {
+  Layout,
+  Like,
+  SelectArea,
+  SelectArea2,
+  TextEmpgasisHeart,
+  TextOrientation,
+  TextStrock,
+} from "./style";
 
 const data = [
   { key: "重庆 cq chongqing", title: "重庆" },
@@ -52,19 +66,32 @@ function CSSTest() {
     document.body.style.setProperty("--testColor", "deeppink");
   }, []);
 
-  useMyCSSFn(transparentize);
-  useMyCSSFn(lighten);
-  useMyCSSFn(darken);
+  // useMyCSSFn(transparentize);
+  // useMyCSSFn(lighten);
+  // useMyCSSFn(darken);
+  useMyCSSFn2(mydarken222);
 
   return (
     <Layout>
+      <TextOrientation lang="ch-zn">
+        <span>2022</span>年<span>7</span>月<span>17</span>
+        日方向控制
+      </TextOrientation>
+      <TextEmpgasisHeart>文字重点装饰</TextEmpgasisHeart>
       <TextStrock data-content="Hello">Hello</TextStrock>
       <Button onClick={switchColor}>Switch Color</Button>
       <h3 style={{ color: "var(--transparentizeTestColor)" }}>
         --transparentizeTestColor
       </h3>
-      <h3 style={{ color: "var(--lightTestColor)" }}>--lightTestColor</h3>
+      {/* <h3 style={{ color: "var(--lightTestColor)" }}>--lightTestColor</h3> */}
+      <h3 className="lightTestColor">--lightTestColor</h3>
       <h3 style={{ color: "var(--darkenTestColor)" }}>--darkenTestColor</h3>
+      <h3 style={{ color: "var(--darken233TestColor)" }}>
+        --darken233TestColor
+      </h3>
+      <h3 style={{ color: "var(--darken234TestColor)" }}>
+        --darken234TestColor
+      </h3>
       <h3 className="firstLetter">First-letter 演示选取第一个字符</h3>
       <h3 className="money">$ 89.9</h3>
       <h3 className="firstLine">
