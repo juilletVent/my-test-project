@@ -1,8 +1,12 @@
 .App {
   /* --transparentizeTestColor: transparentize(0.8, red); */
-  --transparentizeTestColor: transparentize(0.4, var(--testColor));
+  /* --transparentizeTestColor: transparentize(0.4, var(--testColor)); */
   --lightTestColor: lighten(0.4, var(--testColor));
   --darkenTestColor: darken(0.1, var(--testColor));
-  --darken233TestColor: mydarken222(0.05, var(--testColor));
+  --darken233TestColor: mydarken222(0.05, mydarken222(0.05, var(--testColor)));
   --darken234TestColor: mydarken222(0.15, var(--testColor));
+  --transparentizeTestColor: transparentize(
+    0.4,
+    mydarken222(0.05, mydarken222(0.05, var(--testColor)))
+  );
 }

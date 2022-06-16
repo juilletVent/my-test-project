@@ -222,3 +222,7 @@ export const TextOrientation = styled.p`
     text-combine-upright: all;
   }
 `;
+export const CalcColor = styled.div`
+  --useCustomFnColor: mydarken222(0.2, var(--testColor));
+  color: var(--useCustomFnColor);
+`;
