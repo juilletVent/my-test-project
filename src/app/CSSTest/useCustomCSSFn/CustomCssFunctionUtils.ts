@@ -56,7 +56,6 @@ export class CustomCssFunctionUtils {
    */
   observe(targetNode = window.document.body) {
     this.mutationObserver = new MutationObserver((mutationsList) => {
-      console.log("mutationsList: ", mutationsList);
       mutationsList.forEach((mutation) => {
         var nodeAdded = mutation.addedNodes;
         if (this.usedCustomFnVars) {

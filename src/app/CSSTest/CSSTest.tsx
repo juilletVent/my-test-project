@@ -1,9 +1,13 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import { Button, Input, List } from "antd";
 import { ChangeEvent, useCallback, useEffect, useRef, MouseEvent } from "react";
 import { useCustomCSSFn } from "./useCustomCSSFn/useCustomCSSFn";
+// @ts-ignore
+import cssPaint from "!!file-loader?modules!./CssPaint.js";
 import { mydarken222, transparentize } from "./colorUtils";
 import {
   CalcColor,
+  CssPainTest,
   Layout,
   Like,
   SelectArea,
@@ -66,8 +70,16 @@ function CSSTest() {
   // useMyCSSFn(darken);
   useCustomCSSFn([mydarken222, transparentize]);
 
+  useEffect(() => {
+    if ("paintWorklet" in window.CSS) {
+      // @ts-ignore
+      window.CSS.paintWorklet.addModule(cssPaint);
+    }
+  }, []);
+
   return (
     <Layout>
+      <CssPainTest />
       <TextOrientation lang="ch-zn">
         <span>2022</span>年<span>7</span>月<span>17</span>
         日方向控制

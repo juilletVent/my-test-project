@@ -226,3 +226,15 @@ export const CalcColor = styled.div`
   --useCustomFnColor: mydarken222(0.2, var(--testColor));
   color: var(--useCustomFnColor);
 `;
+
+export const CssPainTest = styled.div`
+  --color1: #fff;
+  --color2: #eee;
+  --units: 16;
+  margin: 15px 0;
+  width: 400px;
+  height: 400px;
+  background-image: paint(transparent-grid);
+  background-size: calc(var(--units) * 2px) calc(var(--units) * 2px);
+  background-repeat: repeat repeat;
+`;
