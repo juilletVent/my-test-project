@@ -16,6 +16,7 @@ import {
   TextOrientation,
   TextStrock,
 } from "./style";
+import TestFlip from "./TestFlip";
 
 const data = [
   { key: "重庆 cq chongqing", title: "重庆" },
@@ -79,6 +80,7 @@ function CSSTest() {
 
   return (
     <Layout>
+      <TestFlip />
       <CssPainTest />
       <TextOrientation lang="ch-zn">
         <span>2022</span>年<span>7</span>月<span>17</span>
