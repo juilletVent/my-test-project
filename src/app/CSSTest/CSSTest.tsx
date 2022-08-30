@@ -15,6 +15,7 @@ import {
   TextEmpgasisHeart,
   TextOrientation,
   TextStrock,
+  Transparent,
 } from "./style";
 import TestFlip from "./TestFlip";
 
@@ -80,6 +81,7 @@ function CSSTest() {
 
   return (
     <Layout>
+      <Transparent />
       <TestFlip />
       <CssPainTest />
       <TextOrientation lang="ch-zn">

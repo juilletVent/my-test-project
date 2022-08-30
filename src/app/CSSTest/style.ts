@@ -238,3 +238,16 @@ export const CssPainTest = styled.div`
   background-size: calc(var(--units) * 2px) calc(var(--units) * 2px);
   background-repeat: repeat repeat;
 `;
+export const Transparent = styled.div`
+  height: 200px;
+  background-image: linear-gradient(
+      45deg,
+      #eee 25%,
+      transparent 25%,
+      transparent 75%,
+      #eee 75%
+    ),
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+`;
