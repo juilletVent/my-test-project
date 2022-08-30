@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { PageHeader, Tabs } from "antd";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import HoverCard from "./HoverCard/HoverCard";
 import { runTest, sleep } from "./testTask";
 import { compileTemplete, getSearch, parseSearch } from "./testUtils";
 
 const Layout = styled.div`
-  padding: 10px;
+  padding: 50px;
+  flex: auto;
 `;
+
+const { TabPane } = Tabs;
 
 function JSTest() {
   useEffect(() => {
@@ -24,9 +29,16 @@ function JSTest() {
     );
   }, []);
 
+  const [active, setActive] = useState("hoverCard");
+
   return (
     <Layout>
-      <h3 className="firstLetter">JS Test Page</h3>
+      <PageHeader className="site-page-header" title="Title" />
+      <Tabs key={active} onChange={setActive}>
+        <TabPane tab="hoverCard" key="hoverCard">
+          <HoverCard />
+        </TabPane>
+      </Tabs>
     </Layout>
   );
 }
