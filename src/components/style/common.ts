@@ -16,7 +16,7 @@ export const ContentContainer = styled.div`
   padding: 15px;
   .ant-list-items {
     position: relative;
-    height: 280px;
+    height: 285px;
   }
   .ant-list-item {
     display: flex;
