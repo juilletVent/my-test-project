@@ -1,8 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./App.css";
 import Home from "./app/Home/Home";
-// import DragList from "./app/DragList/DragList";
 
 function App() {
   return (

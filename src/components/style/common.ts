@@ -5,14 +5,14 @@ const menuWidth = 300;
 
 export const LeftMenu = styled.div`
   width: ${menuWidth}px;
-  height: 100%;
+  flex: none;
   ul {
     height: 100%;
   }
 `;
 export const ContentContainer = styled.div`
-  width: calc(100vw - ${menuWidth}px);
-  height: 100vh;
+  width: calc(100% - ${menuWidth}px);
+  min-height: 100vh;
   padding: 15px;
   .ant-list-items {
     position: relative;

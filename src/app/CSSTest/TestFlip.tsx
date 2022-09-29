@@ -23,7 +23,6 @@ const backAfterFlipDown = keyframes`
 `;
 
 const CenterLayout = styled.div`
-  width: 100vw;
   height: 120px;
   display: flex;
   justify-content: center;

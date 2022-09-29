@@ -1,44 +1,36 @@
 import { PageHeader, Tabs } from "antd";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 import HoverCard from "./HoverCard/HoverCard";
-import { runTest, sleep } from "./testTask";
-import { compileTemplete, getSearch, parseSearch } from "./testUtils";
+import UseGesture from "./UseGesture/UseGesture";
 
 const Layout = styled.div`
   padding: 50px;
   flex: auto;
+  .ant-page-header {
+    padding: 16px 0;
+  }
 `;
 
-const { TabPane } = Tabs;
-
 function JSTest() {
-  useEffect(() => {
-    runTest();
-    sleep(2000).then(() => {
-      console.log("logged after 2 seconds.");
-    });
-    console.log("parseSearch：", parseSearch("?a=1&b=45425145"));
-    console.log("getSearch：%s", getSearch({ a: 1, b: "45425145" }));
-    console.log(
-      "compileTemplete：%s",
-      compileTemplete("name:{{ name }}, title: {{ title }}", {
-        name: "Jack",
-        title: "Title",
-      })
-    );
-  }, []);
+  const [active, setActive] = useState("b");
 
-  const [active, setActive] = useState("hoverCard");
+  const items = useMemo(
+    () => [
+      { label: "卡片跟随", key: "a", children: <HoverCard /> }, // 务必填写 key
+      {
+        label: "拖拽测试（@use-gesture/react）",
+        key: "b",
+        children: <UseGesture />,
+      },
+    ],
+    []
+  );
 
   return (
     <Layout>
-      <PageHeader className="site-page-header" title="Title" />
-      <Tabs key={active} onChange={setActive}>
-        <TabPane tab="hoverCard" key="hoverCard">
-          <HoverCard />
-        </TabPane>
-      </Tabs>
+      <PageHeader className="site-page-header" title="JS/库测试" />
+      <Tabs activeKey={active} onChange={setActive} items={items} />
     </Layout>
   );
 }

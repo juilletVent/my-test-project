@@ -1,10 +1,8 @@
 import { Menu } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SortAscendingOutlined, StarOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LeftMenu } from "../../components/style/common";
-
-const { SubMenu } = Menu;
 
 export const menuPath = {
   PATH_SORT_BASIC: "sort-basic",
@@ -22,12 +20,67 @@ function LocalMenu() {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const navigate = useNavigate();
   const onMenuChange = useCallback(
-    ({ key }) => {
+    ({ key }: any) => {
       navigate(key);
     },
     [navigate]
   );
   const matchInfo = useLocation();
+  const items = useMemo(
+    () => [
+      {
+        label: "拖曳排序",
+        key: "sort",
+        icon: <SortAscendingOutlined />,
+        children: [
+          {
+            label: "拖曳排序列表（elementFromPoint）",
+            key: menuPath.PATH_SORT_BASIC,
+          },
+          {
+            label: "拖曳排序列表（基于位置）",
+            key: menuPath.PATH_SORT_POSITION,
+          },
+          {
+            label: "拖曳排序列表（react-use-gesture）",
+            key: menuPath.PATH_SORT_REACT_USE_GESTURE,
+          },
+          {
+            label: "拖曳排序二维表（TODO）",
+            key: menuPath.PATH_SORT_TWO_DIMENSION,
+          },
+          {
+            label: "拖曳排序树（TODO）",
+            key: menuPath.PATH_SORT_TREE,
+          },
+        ],
+      },
+      {
+        label: "特效实现/测试页",
+        key: "effects",
+        icon: <StarOutlined />,
+        children: [
+          {
+            label: "CSS样式测试页",
+            key: menuPath.PATH_EFFECT_DEMO,
+          },
+          {
+            label: "JS样式测试页",
+            key: menuPath.PATH_JS_DEMO,
+          },
+          {
+            label: "贴合滚动-基础（TODO）",
+            key: menuPath.PATH_EFFECT_SCROLL_OFFSET,
+          },
+          {
+            label: "贴合滚动-横向（TODO）",
+            key: menuPath.PATH_EFFECT_SCROLL_HORIZONTAL,
+          },
+        ],
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
     setSelectedKeys([matchInfo.pathname.substr(1)]);
@@ -40,35 +93,8 @@ function LocalMenu() {
         defaultOpenKeys={["sort", "effects"]}
         selectedKeys={selectedKeys}
         mode="inline"
-      >
-        <SubMenu key="sort" icon={<SortAscendingOutlined />} title="拖曳排序">
-          <Menu.Item key={menuPath.PATH_SORT_BASIC}>
-            拖曳排序列表（elementFromPoint）
-          </Menu.Item>
-          <Menu.Item key={menuPath.PATH_SORT_POSITION}>
-            拖曳排序列表（基于位置）
-          </Menu.Item>
-          <Menu.Item key={menuPath.PATH_SORT_REACT_USE_GESTURE}>
-            拖曳排序列表（react-use-gesture）
-          </Menu.Item>
-          <Menu.Item key={menuPath.PATH_SORT_TWO_DIMENSION}>
-            拖曳排序二维表（TODO）
-          </Menu.Item>
-          <Menu.Item key={menuPath.PATH_SORT_TREE}>
-            拖曳排序树（TODO）
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu key="effects" icon={<StarOutlined />} title="特效实现/测试页">
-          <Menu.Item key={menuPath.PATH_EFFECT_DEMO}>CSS样式测试页</Menu.Item>
-          <Menu.Item key={menuPath.PATH_JS_DEMO}>JS样式测试页</Menu.Item>
-          <Menu.Item key={menuPath.PATH_EFFECT_SCROLL_OFFSET}>
-            贴合滚动-基础（TODO）
-          </Menu.Item>
-          <Menu.Item key={menuPath.PATH_EFFECT_SCROLL_HORIZONTAL}>
-            贴合滚动-横向（TODO）
-          </Menu.Item>
-        </SubMenu>
-      </Menu>
+        items={items}
+      />
     </LeftMenu>
   );
 }

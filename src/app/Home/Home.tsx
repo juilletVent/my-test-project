@@ -8,14 +8,14 @@ import SortBasic from "../SortBasic/SortBasic";
 import SortPosition from "../SortPosition/SortPosition";
 import SortTree from "../SortTree/SortTree";
 import SortTwoDimension from "../SortTwoDimension/SortTwoDimension";
+import SortUseGesture from "../SortUseGesture/SortUseGesture";
 import LocalMenu, { menuPath } from "./Menu";
 
 const HomeLayout = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
-  height: 100vh;
-  width: 100vw;
+  align-items: stretch;
+  min-height: 100vh;
 `;
 
 function Home() {
@@ -25,6 +25,10 @@ function Home() {
       <Routes>
         <Route path={menuPath.PATH_SORT_BASIC} element={<SortBasic />} />
         <Route path={menuPath.PATH_SORT_POSITION} element={<SortPosition />} />
+        <Route
+          path={menuPath.PATH_SORT_REACT_USE_GESTURE}
+          element={<SortUseGesture />}
+        />
         <Route
           path={menuPath.PATH_SORT_TWO_DIMENSION}
           element={<SortTwoDimension />}
