@@ -1,6 +1,6 @@
 import { Button, List } from "antd";
 import { ContentContainer } from "../../components/style/common";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { RetweetOutlined } from "@ant-design/icons";
 import { useSprings, config } from "@react-spring/web";
 import { omit, shuffle } from "lodash";
@@ -69,32 +69,37 @@ function SortUseGesture() {
     },
   ]);
 
-  const [order, setOrder] = useState(shuffle(listData.map((_, i) => i)));
-  const [springs, api] = useSprings(listData.length, fn(order));
+  // const [order, setOrder] = useState(shuffle());
+  const orderRef = useRef(listData.map((_, i) => i));
+  const [springs, api] = useSprings(listData.length, fn(orderRef.current));
   const bind = useDrag(
     ({ args: [activeOriginalIndex], active, movement: [, y] }) => {
       // 在列表中使用原始序号寻找当前项目的实际序号
-      const activeCurrentIndex = order.indexOf(activeOriginalIndex);
+      const activeCurrentIndex = orderRef.current.indexOf(activeOriginalIndex);
       // 根据Y计算当前项目应该处于哪个位置
       const nextActiveIndex = clamp(
         Math.round((activeCurrentIndex * itemHeight + y) / itemHeight),
         0,
-        order.length - 1
+        orderRef.current.length - 1
       );
-      const newOrder = arrayMove(order, activeCurrentIndex, nextActiveIndex);
+      const newOrder = arrayMove(
+        orderRef.current,
+        activeCurrentIndex,
+        nextActiveIndex
+      );
       api.start(
         fn(newOrder, active, activeOriginalIndex, activeCurrentIndex, y)
       );
       if (!active) {
-        setOrder(newOrder);
+        orderRef.current = newOrder;
       }
     }
   );
   const shuffleOrder = useCallback(() => {
-    const nextOrder = shuffle(order);
-    setOrder(nextOrder);
-    api.start(fn(nextOrder, false));
-  }, [api, order]);
+    orderRef.current = shuffle(orderRef.current);
+
+    api.start(fn(orderRef.current, false));
+  }, [api]);
 
   return (
     <ContentContainer>
@@ -106,7 +111,6 @@ function SortUseGesture() {
           <ListItemLayout
             className="ant-list-item"
             key={item.key}
-            {...bind(index)}
             style={{
               ...omit(springs[index], ["shadow"]),
               boxShadow: springs[index].shadow.to(
@@ -115,7 +119,11 @@ function SortUseGesture() {
               position: "relative",
             }}
           >
-            <ListItem key={item.key} content={item.content} />
+            <ListItem
+              key={item.key}
+              content={item.content}
+              grabHandler={bind(index)}
+            />
           </ListItemLayout>
         )}
       />
