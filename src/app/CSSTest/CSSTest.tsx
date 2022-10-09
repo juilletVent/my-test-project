@@ -7,6 +7,7 @@ import cssPaint from "!!file-loader?modules!./CssPaint.js";
 import { mydarken222, transparentize } from "./colorUtils";
 import {
   CalcColor,
+  ContainerQuery,
   CssPainTest,
   Layout,
   Like,
@@ -131,6 +132,9 @@ function CSSTest() {
       <SelectArea>蚂蚁线</SelectArea>
       <SelectArea2 className="ants-line">蚂蚁线完美实现-可用于遮罩</SelectArea2>
       <Like onClick={onLick} />
+      <ContainerQuery>
+        <h3>Container Query Test （max-width:1200px）</h3>
+      </ContainerQuery>
     </Layout>
   );
 }

@@ -251,3 +251,7 @@ export const Transparent = styled.div`
   background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
 `;
+
+export const ContainerQuery = styled.div`
+  container-type: inline-size;
+`;

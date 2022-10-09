@@ -69,7 +69,6 @@ function SortUseGesture() {
     },
   ]);
 
-  // const [order, setOrder] = useState(shuffle());
   const orderRef = useRef(listData.map((_, i) => i));
   const [springs, api] = useSprings(listData.length, fn(orderRef.current));
   const bind = useDrag(
