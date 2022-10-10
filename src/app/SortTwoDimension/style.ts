@@ -6,7 +6,6 @@ export const SortLayout = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   align-items: stretch;
-  width: 700px;
 `;
 
 export const SortItem = styled(animated.div)`

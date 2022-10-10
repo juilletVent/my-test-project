@@ -8,6 +8,6 @@ import img7 from "@/img/square/flower.jpg";
 import img8 from "@/img/square/ルナ.jpg";
 import img9 from "@/img/square/66666.jpg";
 
-const imgs = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+const imgs = [img1, img2, img3 /* , img4, img5, img6, img7, img8, img9 */];
 
 export default imgs;
