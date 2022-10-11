@@ -31,7 +31,6 @@ const fn =
           immediate: (key: string) => key === "zIndex",
           config: (key: string) =>
             key === "y" ? config.stiff : config.default,
-          onRest: () => console.log("onRest active"),
         }
       : {
           y: (order.indexOf(index) - index) * itemHeight,
@@ -39,7 +38,6 @@ const fn =
           zIndex: 0,
           shadow: 0,
           immediate: false,
-          onRest: () => console.log("onRest"),
         };
   };
 
@@ -96,7 +94,6 @@ function SortUseGesture() {
   );
   const shuffleOrder = useCallback(() => {
     orderRef.current = shuffle(orderRef.current);
-
     api.start(fn(orderRef.current, false));
   }, [api]);
 

@@ -46,7 +46,7 @@ function LocalMenu() {
             key: menuPath.PATH_SORT_REACT_USE_GESTURE,
           },
           {
-            label: "拖曳排序二维表（TODO）",
+            label: "拖曳排序二维表（粗略实现）",
             key: menuPath.PATH_SORT_TWO_DIMENSION,
           },
           {
