@@ -42,32 +42,18 @@ const TableItem = styled.div<{ val: number }>`
 const TableItem2 = styled.div<{ val: number }>`
   position: relative;
   height: 200px;
-  transition: 0.75s;
-  --percentage: gray;
-  transition: 0.75s;
-  /* #e9e9e9 calc(calc(100 - var(--percentage)) + "%"), */
-  /* background-image: linear-gradient(to bottom, var(--percentage), #37c); */
-  --start-stop: olive;
-  --end-stop: green;
-  background: linear-gradient(to bottom, var(--start-stop), var(--end-stop));
-  /* transition: --start-stop 0.5s, --end-stop 0.5s; */
-  &:hover {
-    --start-stop: green;
-    --end-stop: purple;
-  }
-
-  /* 
-  #37c calc(calc(100 - var(--percentage)) + calc(var(--percentage) / 2) + "%"),
-    #3c7 0
-  */
-  /* #37c ${(props) => 100 - props.val + props.val / 2}%, */
-  /* background-image: linear-gradient(
+  transition: --start-color 0.75s, --end-color 0.75s;
+  --start-color: deepskyblue;
+  --end-color: deeppink;
+  background-image: linear-gradient(
     to bottom,
-    #e9e9e9 ${(props) => 100 - props.val}%,
-    #37c 0,
-    #37c ${(props) => 100 - props.val + props.val / 2}%,
-    #3c7 0
-  ); */
+    var(--start-color),
+    var(--end-color)
+  );
+  &:hover {
+    --start-color: deeppink;
+    --end-color: deepskyblue;
+  }
   border-radius: 4px;
 `;
 
