@@ -9,6 +9,7 @@ import SortPosition from "../SortPosition/SortPosition";
 import SortTree from "../SortTree/SortTree";
 import SortTwoDimension from "../SortTwoDimension/SortTwoDimension";
 import SortUseGesture from "../SortUseGesture/SortUseGesture";
+import SimpleChart from "../VisualizationTest/SimpleChart";
 import LocalMenu, { menuPath } from "./Menu";
 
 const HomeLayout = styled.div`
@@ -43,6 +44,10 @@ function Home() {
         <Route
           path={menuPath.PATH_EFFECT_SCROLL_HORIZONTAL}
           element={<ScrollHorizontal />}
+        />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART}
+          element={<SimpleChart />}
         />
         {/* 重定向 */}
         <Route path="*" element={<Navigate to={menuPath.PATH_SORT_BASIC} />} />

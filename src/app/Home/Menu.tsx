@@ -14,6 +14,7 @@ export const menuPath = {
   PATH_JS_DEMO: "js-demo",
   PATH_EFFECT_SCROLL_OFFSET: "scroll-offset",
   PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
+  PATH_VISUALIZATION_TEST_SIMPLE_CHART: "visualization-test-simple-chart",
 };
 
 function LocalMenu() {
@@ -75,6 +76,17 @@ function LocalMenu() {
           {
             label: "贴合滚动-横向（TODO）",
             key: menuPath.PATH_EFFECT_SCROLL_HORIZONTAL,
+          },
+        ],
+      },
+      {
+        label: "可视化-测试页",
+        key: "visualization",
+        icon: <StarOutlined />,
+        children: [
+          {
+            label: "基础图表绘制",
+            key: menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART,
           },
         ],
       },
