@@ -24,6 +24,12 @@ function App() {
         inherits: false,
         initialValue: "transparent",
       });
+      window.CSS.registerProperty({
+        name: "--progress",
+        syntax: "<percentage> | <number> | <length>",
+        inherits: false,
+        initialValue: 0,
+      });
     }
   }, []);
 

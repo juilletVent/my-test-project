@@ -42,17 +42,21 @@ const TableItem = styled.div<{ val: number }>`
 const TableItem2 = styled.div<{ val: number }>`
   position: relative;
   height: 200px;
-  transition: --start-color 0.75s, --end-color 0.75s;
-  --start-color: deepskyblue;
-  --end-color: deeppink;
+  transition: --start-color 0.75s, --end-color 0.75s, --progress 0.75s;
+  --start-color: #37c;
+  --end-color: #3c7;
+  --progress: ${(props) => 100 - props.val}%;
   background-image: linear-gradient(
     to bottom,
-    var(--start-color),
-    var(--end-color)
+    #e9e9e9 var(--progress),
+    var(--start-color) 0,
+    var(--start-color)
+      calc(var(--progress) + calc(calc(100% - var(--progress)) / 2)),
+    var(--end-color) 0
   );
   &:hover {
-    --start-color: deeppink;
-    --end-color: deepskyblue;
+    --start-color: #3c7;
+    --end-color: #37c;
   }
   border-radius: 4px;
 `;
@@ -72,7 +76,7 @@ function SimpleChart() {
   return (
     <Layout>
       <Panel>
-        <PanelHeader>CSS+渐变实现</PanelHeader>
+        <PanelHeader>DOM+渐变实现</PanelHeader>
         <PanelTableLayout>
           {val.map((v, index) => (
             <TableItem val={v} key={index} />
@@ -80,7 +84,7 @@ function SimpleChart() {
         </PanelTableLayout>
       </Panel>
       <Panel>
-        <PanelHeader>纯渐变实现</PanelHeader>
+        <PanelHeader>Css Houdini+渐变实现</PanelHeader>
         <PanelTableLayout>
           {val.map((v, index) => (
             <TableItem2 val={v} key={index} />

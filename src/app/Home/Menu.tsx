@@ -102,7 +102,7 @@ function LocalMenu() {
     <LeftMenu>
       <Menu
         onClick={onMenuChange}
-        defaultOpenKeys={["sort", "effects"]}
+        defaultOpenKeys={["sort", "effects", "visualization"]}
         selectedKeys={selectedKeys}
         mode="inline"
         items={items}

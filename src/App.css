@@ -17,9 +17,13 @@
   inherits: false;
   initial-value: deepskyblue;
 }
-
 @property --end-color {
   syntax: "<color>";
   inherits: false;
   initial-value: deeppink;
+}
+@property --progress {
+  syntax: "<percentage> | <number> | <length>";
+  inherits: false;
+  initial-value: 0;
 }
