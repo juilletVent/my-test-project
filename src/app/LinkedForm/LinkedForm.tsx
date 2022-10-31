@@ -11,7 +11,7 @@ const { Option } = Select;
 
 function LinkedForm() {
   const [form] = Form.useForm();
-  const { getFieldValue, setFieldsValue } = form;
+  const { setFieldsValue } = form;
 
   const onFinish = useCallback((val: any) => {
     console.log("val: ", val);
