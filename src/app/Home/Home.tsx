@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router";
 import styled from "styled-components";
 import CSSTest from "../CSSTest/CSSTest";
 import JSTest from "../JSTest/JSTest";
+import LinkedForm from "../LinkedForm/LinkedForm";
 import ScrollHorizontal from "../ScrollHorizontal/ScrollHorizontal";
 import ScrollOffset from "../ScrollOffset/ScrollOffset";
 import SortBasic from "../SortBasic/SortBasic";
@@ -49,6 +50,7 @@ function Home() {
           path={menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART}
           element={<SimpleChart />}
         />
+        <Route path={menuPath.PATH_LINKED_FORM} element={<LinkedForm />} />
         {/* 重定向 */}
         <Route path="*" element={<Navigate to={menuPath.PATH_SORT_BASIC} />} />
       </Routes>

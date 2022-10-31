@@ -1,6 +1,10 @@
 import { Menu } from "antd";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SortAscendingOutlined, StarOutlined } from "@ant-design/icons";
+import {
+  SortAscendingOutlined,
+  StarOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LeftMenu } from "../../components/style/common";
 
@@ -15,6 +19,7 @@ export const menuPath = {
   PATH_EFFECT_SCROLL_OFFSET: "scroll-offset",
   PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
   PATH_VISUALIZATION_TEST_SIMPLE_CHART: "visualization-test-simple-chart",
+  PATH_LINKED_FORM: "linked-form",
 };
 
 function LocalMenu() {
@@ -30,43 +35,43 @@ function LocalMenu() {
   const items = useMemo(
     () => [
       {
-        label: "拖曳排序",
+        label: "拖拽排序",
         key: "sort",
         icon: <SortAscendingOutlined />,
         children: [
           {
-            label: "拖曳排序列表（elementFromPoint）",
+            label: "拖拽排序列表（elementFromPoint）",
             key: menuPath.PATH_SORT_BASIC,
           },
           {
-            label: "拖曳排序列表（基于位置）",
+            label: "拖拽排序列表（基于位置）",
             key: menuPath.PATH_SORT_POSITION,
           },
           {
-            label: "拖曳排序列表（react-use-gesture）",
+            label: "拖拽排序列表（react-use-gesture）",
             key: menuPath.PATH_SORT_REACT_USE_GESTURE,
           },
           {
-            label: "拖曳排序二维表（粗略实现）",
+            label: "拖拽排序二维表（粗略实现）",
             key: menuPath.PATH_SORT_TWO_DIMENSION,
           },
           {
-            label: "拖曳排序树（TODO）",
+            label: "拖拽排序树（TODO）",
             key: menuPath.PATH_SORT_TREE,
           },
         ],
       },
       {
-        label: "特效实现/测试页",
+        label: "特效实现",
         key: "effects",
         icon: <StarOutlined />,
         children: [
           {
-            label: "CSS样式测试页",
+            label: "CSS样式",
             key: menuPath.PATH_EFFECT_DEMO,
           },
           {
-            label: "JS样式测试页",
+            label: "JS样式",
             key: menuPath.PATH_JS_DEMO,
           },
           {
@@ -80,13 +85,24 @@ function LocalMenu() {
         ],
       },
       {
-        label: "可视化-测试页",
+        label: "可视化",
         key: "visualization",
         icon: <StarOutlined />,
         children: [
           {
             label: "基础图表绘制",
             key: menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART,
+          },
+        ],
+      },
+      {
+        label: "框架/工具测试",
+        key: "framework",
+        icon: <SettingOutlined />,
+        children: [
+          {
+            label: "Antd联动表单",
+            key: menuPath.PATH_LINKED_FORM,
           },
         ],
       },
@@ -102,7 +118,7 @@ function LocalMenu() {
     <LeftMenu>
       <Menu
         onClick={onMenuChange}
-        defaultOpenKeys={["sort", "effects", "visualization"]}
+        defaultOpenKeys={["sort", "effects", "visualization", "framework"]}
         selectedKeys={selectedKeys}
         mode="inline"
         items={items}
