@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { Form, Switch, Input, Button, Select } from "antd";
-import styled from "styled-components";
-
-const Layout = styled.div`
-  padding: 20px;
-`;
+import { ContentLayout } from "../../components/style/common";
 
 const { Item: FormItem } = Form;
 const { Option } = Select;
@@ -28,7 +24,7 @@ function LinkedForm() {
   }, [setFieldsValue]);
 
   return (
-    <Layout>
+    <ContentLayout>
       <Form
         form={form}
         onFinish={onFinish}
@@ -88,7 +84,7 @@ function LinkedForm() {
           Submit
         </Button>
       </Form>
-    </Layout>
+    </ContentLayout>
   );
 }
 

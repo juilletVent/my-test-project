@@ -20,6 +20,7 @@ export const menuPath = {
   PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
   PATH_VISUALIZATION_TEST_SIMPLE_CHART: "visualization-test-simple-chart",
   PATH_LINKED_FORM: "linked-form",
+  PATH_LARGE_FORM: "large-form",
 };
 
 function LocalMenu() {
@@ -103,6 +104,10 @@ function LocalMenu() {
           {
             label: "Antd联动表单",
             key: menuPath.PATH_LINKED_FORM,
+          },
+          {
+            label: "Antd大型表单",
+            key: menuPath.PATH_LARGE_FORM,
           },
         ],
       },

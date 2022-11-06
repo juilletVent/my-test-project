@@ -41,3 +41,7 @@ export const RelativeItemLayout = styled(animated.div)`
   position: relative;
   background-color: white;
 `;
+
+export const ContentLayout = styled.div`
+  padding: 20px;
+`;

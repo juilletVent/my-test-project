@@ -1,4 +1,4 @@
-import UnorderedListOutlined from "@ant-design/icons/lib/icons/UnorderedListOutlined";
+import { UnorderedListOutlined } from "@ant-design/icons";
 import { ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 import { DragBtn } from "../../components/style/common";
 
