@@ -11,6 +11,7 @@ import SortPosition from "../SortPosition/SortPosition";
 import SortTree from "../SortTree/SortTree";
 import SortTwoDimension from "../SortTwoDimension/SortTwoDimension";
 import SortUseGesture from "../SortUseGesture/SortUseGesture";
+import CanvasTest1 from "../VisualizationTest/CanvasTest1";
 import SimpleChart from "../VisualizationTest/SimpleChart";
 import LocalMenu, { menuPath } from "./Menu";
 
@@ -50,6 +51,10 @@ function Home() {
         <Route
           path={menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART}
           element={<SimpleChart />}
+        />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_CANVAS1}
+          element={<CanvasTest1 />}
         />
         <Route path={menuPath.PATH_LINKED_FORM} element={<LinkedForm />} />
         <Route path={menuPath.PATH_LARGE_FORM} element={<LargeForm />} />

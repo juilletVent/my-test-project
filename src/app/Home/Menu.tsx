@@ -19,6 +19,7 @@ export const menuPath = {
   PATH_EFFECT_SCROLL_OFFSET: "scroll-offset",
   PATH_EFFECT_SCROLL_HORIZONTAL: "scroll-horizontal",
   PATH_VISUALIZATION_TEST_SIMPLE_CHART: "visualization-test-simple-chart",
+  PATH_VISUALIZATION_TEST_CANVAS1: "visualization-test-canvas1",
   PATH_LINKED_FORM: "linked-form",
   PATH_LARGE_FORM: "large-form",
 };
@@ -93,6 +94,10 @@ function LocalMenu() {
           {
             label: "基础图表绘制",
             key: menuPath.PATH_VISUALIZATION_TEST_SIMPLE_CHART,
+          },
+          {
+            label: "Canvas测试-1",
+            key: menuPath.PATH_VISUALIZATION_TEST_CANVAS1,
           },
         ],
       },
