@@ -72,12 +72,16 @@ const getColor = memoize(
 );
 
 function canvasRender(canvasNode: HTMLCanvasElement) {
+  const renderController = new AbortController();
   const ctx = canvasNode.getContext("2d")!;
   let timeLine = 0;
   let prevRenderTime = performance.now();
   let fspTimeLineCursor = 0;
   let fsp = 0;
   const render = () => {
+    if (renderController.signal.aborted) {
+      return;
+    }
     // 高精度时间的单位是毫秒（ms）
     const nowTime = performance.now();
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -99,6 +103,7 @@ function canvasRender(canvasNode: HTMLCanvasElement) {
     window.requestAnimationFrame(render);
   };
   window.requestAnimationFrame(render);
+  return () => renderController.abort();
 }
 
 function CanvasTest1() {
@@ -106,7 +111,7 @@ function CanvasTest1() {
 
   useEffect(() => {
     if (canvasNodeRef.current) {
-      canvasRender(canvasNodeRef.current);
+      return canvasRender(canvasNodeRef.current);
     }
   }, []);
 
