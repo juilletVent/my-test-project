@@ -1,12 +1,8 @@
-import React, { useRef } from "react";
 import { range, uniqueId } from "lodash";
-import { Form, Table, Input, Switch, Select, Button } from "antd";
+import { Form, Table, Button } from "antd";
 import { ContentLayout } from "../../components/style/common";
 // import { WrappedFormUtils } from "antd3x/lib/form/Form";
 
-const { Item: FormItem } = Form;
-const { Option } = Select;
-const { TextArea } = Input;
 const { Column } = Table;
 
 const tableData = range(0, 3).map((i) => ({ id: i, key: uniqueId("id_") }));

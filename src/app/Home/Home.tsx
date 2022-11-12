@@ -14,6 +14,7 @@ import SortUseGesture from "../SortUseGesture/SortUseGesture";
 import CanvasTest1 from "../VisualizationTest/CanvasTest1";
 import CanvasTest2 from "../VisualizationTest/CanvasTest2";
 import SimpleChart from "../VisualizationTest/SimpleChart";
+import SvgTest1 from "../VisualizationTest/SvgTest1";
 import LocalMenu, { menuPath } from "./Menu";
 
 const HomeLayout = styled.div`
@@ -60,6 +61,10 @@ function Home() {
         <Route
           path={menuPath.PATH_VISUALIZATION_TEST_CANVAS2}
           element={<CanvasTest2 />}
+        />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_SVG1}
+          element={<SvgTest1 />}
         />
         <Route path={menuPath.PATH_LINKED_FORM} element={<LinkedForm />} />
         <Route path={menuPath.PATH_LARGE_FORM} element={<LargeForm />} />
