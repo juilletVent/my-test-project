@@ -22,6 +22,7 @@ export const menuPath = {
   PATH_VISUALIZATION_TEST_CANVAS1: "visualization-test-canvas1",
   PATH_VISUALIZATION_TEST_CANVAS2: "visualization-test-canvas2",
   PATH_VISUALIZATION_TEST_SVG1: "visualization-test-svg1",
+  PATH_VISUALIZATION_TEST_WEBGL1: "visualization-test-webgl-1",
   PATH_LINKED_FORM: "linked-form",
   PATH_LARGE_FORM: "large-form",
 };
@@ -109,6 +110,10 @@ function LocalMenu() {
             label: "SVG测试-1",
             key: menuPath.PATH_VISUALIZATION_TEST_SVG1,
           },
+          {
+            label: "WebGL测试-1",
+            key: menuPath.PATH_VISUALIZATION_TEST_WEBGL1,
+          },
         ],
       },
       {
@@ -138,7 +143,7 @@ function LocalMenu() {
     <LeftMenu>
       <Menu
         onClick={onMenuChange}
-        defaultOpenKeys={["sort", "effects", "visualization", "framework"]}
+        defaultOpenKeys={["visualization"]}
         selectedKeys={selectedKeys}
         mode="inline"
         items={items}

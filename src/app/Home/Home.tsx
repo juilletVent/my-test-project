@@ -15,6 +15,7 @@ import CanvasTest1 from "../VisualizationTest/CanvasTest1";
 import CanvasTest2 from "../VisualizationTest/CanvasTest2";
 import SimpleChart from "../VisualizationTest/SimpleChart";
 import SvgTest1 from "../VisualizationTest/SvgTest1";
+import WebGLTest1 from "../VisualizationTest/WebGLTest1";
 import LocalMenu, { menuPath } from "./Menu";
 
 const HomeLayout = styled.div`
@@ -68,6 +69,10 @@ function Home() {
         />
         <Route path={menuPath.PATH_LINKED_FORM} element={<LinkedForm />} />
         <Route path={menuPath.PATH_LARGE_FORM} element={<LargeForm />} />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_WEBGL1}
+          element={<WebGLTest1 />}
+        />
         {/* 重定向 */}
         <Route path="*" element={<Navigate to={menuPath.PATH_SORT_BASIC} />} />
       </Routes>
