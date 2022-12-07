@@ -1,12 +1,12 @@
+import { random } from "lodash";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-// @ts-ignore
-import rough from "roughjs/bundled/rough.esm";
 import { ContentPadding, GroupHeader } from "../../style/common.style";
 import { Vector2D } from "../../utils/Vector2D";
 
-const canvasWidth = 500;
-const canvasHeight = 256;
+const canvasWidth = 1500;
+const canvasHeight = 800;
+const [centerX, centerY] = [canvasWidth / 2, canvasHeight];
 
 const Canvas = styled.canvas.attrs({
   width: canvasWidth,
@@ -27,30 +27,106 @@ function renderFPS(ctx: CanvasRenderingContext2D, fsp: number) {
   ctx.restore();
 }
 
-function drawBranch(ctx: CanvasRenderingContext2D, v0: Vector2D) {}
+type DrawBranchOpt = {
+  ctx: CanvasRenderingContext2D;
+  /** 当前树枝基准向量 */
+  baseVector: Vector2D;
+  /** 当前树枝长度 */
+  len: number;
+  /** 当前树枝粗细 */
+  thickness: number;
+  /** 当前树枝偏转角度（相对于X轴，单位：弧度） */
+  dir: number;
+  /** 随机偏向因子，随机影响实际绘制偏转角度，越靠近根部这个值应该越大，越靠近树枝顶部这个值应该越小 */
+  bias: number;
+};
+
+function drawBranch(opt: DrawBranchOpt) {
+  const { ctx, baseVector, len, thickness, dir, bias } = opt;
+  const nextVector = baseVector
+    .copy()
+    .rotate(dir)
+    .normalize()
+    .scale(len)
+    .add(baseVector);
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = thickness;
+  ctx.beginPath();
+
+  ctx.moveTo(baseVector.x, baseVector.y);
+  ctx.lineTo(nextVector.x, nextVector.y);
+  ctx.stroke();
+
+  if (thickness < 5 && Math.random() < 0.3) {
+    const th = Math.random() * 6 + 3;
+    ctx.save();
+    ctx.strokeStyle = "#c72c35";
+    ctx.lineWidth = th;
+    ctx.beginPath();
+    ctx.moveTo(nextVector.x, nextVector.y);
+    ctx.lineTo(nextVector.x, nextVector.y - 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  if (thickness > 3) {
+    // 角度扩散比例
+    const dirSpreadPercentage = random(0, bias, true);
+    // 粗细收缩比例
+    const thicknessShrinkPercentage = random(0.6, 0.8, true);
+    // 长度收缩比例
+    const lenShrinkPercentage = random(0.85, 0.9, true);
+
+    const leftDir = Math.PI * dirSpreadPercentage;
+    const rightDir = Math.PI * -dirSpreadPercentage;
+    const nextThickness = thickness * thicknessShrinkPercentage;
+    const nextLen = len * lenShrinkPercentage;
+
+    drawBranch({
+      ...opt,
+      baseVector: nextVector,
+      len: nextLen,
+      thickness: nextThickness,
+      dir: leftDir,
+    });
+    drawBranch({
+      ...opt,
+      baseVector: nextVector,
+      len: nextLen,
+      thickness: nextThickness,
+      dir: rightDir,
+    });
+    drawBranch({
+      ...opt,
+      baseVector: nextVector,
+      len: nextLen,
+      thickness: nextThickness,
+      dir: rightDir,
+    });
+  }
+}
 
 function renderEffect(canvasNode: HTMLCanvasElement) {
-  const rc = rough.canvas(canvasNode);
-  // 线条样式配置：粗糙度、线宽、填充颜色
-  const hillOpts = { roughness: 2.8, strokeWidth: 2, fill: "blue" };
-
   // 变换坐标轴，以符合平常习惯的逻辑坐标进行绘制
-  const { ctx }: { ctx: CanvasRenderingContext2D } = rc;
+  const ctx = canvasNode.getContext("2d")!;
   ctx.save();
   // 移动坐标原点
-  ctx.translate(256, 256);
+  ctx.translate(centerX, centerY);
   // 变换Y轴方向
   ctx.scale(1, -1);
   // 线段端点变为圆头
   ctx.lineCap = "round";
-  rc.path("M-180 0L-80 100L20 0", hillOpts);
-  rc.path("M-20 0L80 100L180 0", hillOpts);
-  rc.circle(0, 150, 105, {
-    stroke: "red",
-    strokeWidth: 4,
-    fill: "rgba(255,255, 0, 0.4)",
-    fillStyle: "solid",
+
+  // 绘制随机树
+  drawBranch({
+    ctx,
+    baseVector: new Vector2D(1, 0),
+    len: 120,
+    thickness: 20,
+    dir: Math.PI * 0.5,
+    bias: 0.35,
   });
+
   ctx.restore();
 }
 

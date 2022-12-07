@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ContentPadding, GroupHeader } from "../../style/common.style";
 
@@ -84,6 +84,7 @@ function renderWebGL(gl: WebGLRenderingContext) {
   gl.enableVertexAttribArray(vPosition);
 
   gl.clear(gl.COLOR_BUFFER_BIT);
+  // gl.drawArrays(gl.TRIANGLES, 0, points.length / 2);
   gl.drawArrays(gl.LINE_LOOP, 0, points.length / 2);
 }
 

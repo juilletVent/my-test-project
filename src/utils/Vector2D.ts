@@ -20,7 +20,7 @@ export class Vector2D extends Array {
   }
 
   /** 模长 */
-  get length() {
+  get vLength() {
     return Math.hypot(this.x, this.y);
   }
 
@@ -67,7 +67,7 @@ export class Vector2D extends Array {
 
   /** 取得单位向量 */
   normalize() {
-    return this.scale(1 / this.length);
+    return this.scale(1 / this.vLength);
   }
 
   /** 旋转 */
