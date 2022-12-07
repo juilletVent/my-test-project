@@ -13,6 +13,8 @@ import SortTwoDimension from "../SortTwoDimension/SortTwoDimension";
 import SortUseGesture from "../SortUseGesture/SortUseGesture";
 import CanvasTest1 from "../VisualizationTest/CanvasTest1";
 import CanvasTest2 from "../VisualizationTest/CanvasTest2";
+import CanvasTest3 from "../VisualizationTest/CanvasTest3";
+import CanvasTest4 from "../VisualizationTest/CanvasTest4";
 import SimpleChart from "../VisualizationTest/SimpleChart";
 import SvgTest1 from "../VisualizationTest/SvgTest1";
 import WebGLTest1 from "../VisualizationTest/WebGLTest1";
@@ -62,6 +64,14 @@ function Home() {
         <Route
           path={menuPath.PATH_VISUALIZATION_TEST_CANVAS2}
           element={<CanvasTest2 />}
+        />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_CANVAS3}
+          element={<CanvasTest3 />}
+        />
+        <Route
+          path={menuPath.PATH_VISUALIZATION_TEST_CANVAS4}
+          element={<CanvasTest4 />}
         />
         <Route
           path={menuPath.PATH_VISUALIZATION_TEST_SVG1}

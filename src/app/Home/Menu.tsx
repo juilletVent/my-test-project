@@ -21,6 +21,8 @@ export const menuPath = {
   PATH_VISUALIZATION_TEST_SIMPLE_CHART: "visualization-test-simple-chart",
   PATH_VISUALIZATION_TEST_CANVAS1: "visualization-test-canvas1",
   PATH_VISUALIZATION_TEST_CANVAS2: "visualization-test-canvas2",
+  PATH_VISUALIZATION_TEST_CANVAS3: "visualization-test-canvas3",
+  PATH_VISUALIZATION_TEST_CANVAS4: "visualization-test-canvas4",
   PATH_VISUALIZATION_TEST_SVG1: "visualization-test-svg1",
   PATH_VISUALIZATION_TEST_WEBGL1: "visualization-test-webgl-1",
   PATH_LINKED_FORM: "linked-form",
@@ -105,6 +107,14 @@ function LocalMenu() {
           {
             label: "Canvas测试-2",
             key: menuPath.PATH_VISUALIZATION_TEST_CANVAS2,
+          },
+          {
+            label: "Canvas测试-3",
+            key: menuPath.PATH_VISUALIZATION_TEST_CANVAS3,
+          },
+          {
+            label: "Canvas测试-4",
+            key: menuPath.PATH_VISUALIZATION_TEST_CANVAS4,
           },
           {
             label: "SVG测试-1",

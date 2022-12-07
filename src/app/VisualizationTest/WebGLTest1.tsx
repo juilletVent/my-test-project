@@ -70,7 +70,7 @@ function renderWebGL(gl: WebGLRenderingContext) {
   gl.useProgram(program);
 
   // 顶点数据
-  const points = new Float32Array(createCircleVertex(0, 0, 1, 4));
+  const points = new Float32Array(createCircleVertex(0, 0, 1, 6));
   // 将定点数据写入缓冲区
   const bufferId = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
